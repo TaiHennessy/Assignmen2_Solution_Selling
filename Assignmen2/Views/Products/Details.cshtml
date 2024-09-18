@@ -1,0 +1,80 @@
+﻿@model Assignmen2.Models.ProductWithSeller
+
+
+@{
+    ViewData["Title"] = "Product Details";
+    var userId = ViewData["UserId"] as string;  // Get the current user's ID from ViewData
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                @if (!string.IsNullOrEmpty(Model.Product.PhotoPath))
+                {
+                    <img src="@Model.Product.PhotoPath" class="card-img" alt="@Model.Product.Name" style="object-fit: cover; height: 100%; width: 100%;">
+                }
+                else
+                {
+                    <img src="https://via.placeholder.com/300" class="card-img" alt="Placeholder Image">
+                }
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2 class="card-title text-primary">@Model.Product.Name</h2>
+                    <p class="card-text">
+                        <strong>Price:</strong> $@Model.Product.Price.ToString("F2")
+                    </p>
+                    <p class="card-text">
+                        <strong>Available Quantity:</strong> @Model.Product.Quantity
+                    </p>
+                    <p class="card-text">
+                        <strong>Seller:</strong> @Model.Seller?.UserName 
+                    </p>
+
+                    <hr class="my-4">
+                    <p class="card-text">
+                        <strong>Description:</strong>
+                        <span class="text-muted">@Model.Product.Description</span>
+                    </p>
+
+                    <!-- Add to Cart Form -->
+                    <form method="get" action="@Url.Action("Buy", "Cart")" class="form-inline">
+                        <input type="hidden" name="id" value="@Model.Product.Id" />
+
+                        <div class="form-group mb-2">
+                            <label for="quantity" class="mr-2">Quantity:</label>
+                            <input type="number" class="form-control" name="quantity" id="quantity" value="1" min="1" max="@Model.Product.Quantity" />
+                        </div>
+
+                        <button type="submit" class="btn btn-success mb-2">
+                            Add to Cart
+                        </button>
+                    </form>
+
+
+                    <!-- Show Edit and Delete only if the user is Admin or the Seller -->
+                    @if (User.IsInRole("Admin") || userId == Model.Product.SellerId)
+                    {
+                        <div class="d-flex justify-content-start mt-4">
+                            <a asp-action="Edit" asp-route-id="@Model.Product.Id" class="btn btn-warning me-2">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@Model.Product.Id" class="btn btn-danger">Delete</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="d-flex justify-content-start mt-4">
+                            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

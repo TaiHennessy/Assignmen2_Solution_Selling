@@ -1,0 +1,184 @@
+﻿/* General styling for links */
+a {
+    color: #0077cc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+    a:hover {
+        color: #005fa3;
+        text-decoration: underline;
+    }
+
+    /* Navbar brand styling */
+    a.navbar-brand {
+        white-space: normal;
+        text-align: center;
+        word-break: break-word;
+        font-weight: bold;
+        font-size: 1.5rem;
+        color: #333;
+    }
+
+        a.navbar-brand:hover {
+            color: #005fa3;
+        }
+
+/* Primary button styling */
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #0069d9;
+    border-radius: 30px;
+    padding: 0.5rem 1.5rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        box-shadow: 0 0.5rem 1rem rgba(0, 123, 255, 0.3);
+    }
+
+/* Outline button styling */
+.btn-outline-primary {
+    color: #007bff;
+    border-color: #007bff;
+    border-radius: 30px;
+    padding: 0.5rem 1.5rem;
+    transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .btn-outline-primary:hover {
+        color: #fff;
+        background-color: #007bff;
+        box-shadow: 0 0.5rem 1rem rgba(0, 123, 255, 0.3);
+    }
+
+/* Navigation bar styling */
+.navbar {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #007bff;
+}
+
+.navbar-nav .nav-link {
+    color: #333;
+    font-weight: bold;
+    margin-right: 1rem;
+    transition: color 0.3s ease;
+}
+
+    .navbar-nav .nav-link:hover {
+        color: #005fa3;
+    }
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #0069d9;
+}
+
+/* Footer styling */
+.footer {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    text-align: center;
+    padding: 1rem 0;
+    border-top: 2px solid #007bff;
+}
+
+/* Shadow and border styling */
+.border-top {
+    border-top: 2px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 2px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+}
+
+/* Policy acceptance button */
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+    button.accept-policy:hover {
+        background-color: #0056b3;
+        box-shadow: 0 0.5rem 1rem rgba(0, 123, 255, 0.3);
+    }
+
+/* General card styling for product list */
+.card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+    }
+
+/* Card image styling */
+.card-img-top {
+    border-radius: 0;
+    transition: opacity 0.3s ease;
+}
+
+    .card-img-top:hover {
+        opacity: 0.9;
+    }
+
+/* Card body styling */
+.card-body {
+    padding: 1rem;
+}
+
+/* Card title styling */
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+/* Card text styling */
+.card-text {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Modify input quantity fields */
+input[type="number"] {
+    width: 100%;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 1rem;
+}
+
+/* Add-to-cart button styling */
+.add-to-cart {
+    width: 100%;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .add-to-cart:hover {
+        background-color: #218838;
+        box-shadow: 0 0.5rem 1rem rgba(40, 167, 69, 0.3);
+    }

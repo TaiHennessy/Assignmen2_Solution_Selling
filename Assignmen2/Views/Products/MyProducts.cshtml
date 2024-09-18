@@ -1,0 +1,72 @@
+﻿@model Assignmen2.ViewModels.MyProductsAndSpendingViewModel
+
+@{
+    ViewData["Title"] = "My Products";
+}
+
+<h1>My Products</h1>
+
+<!-- Display the products -->
+<div class="row">
+    @if (!Model.Products.Any())
+    {
+        <div class="col-12">
+            <p>You have not listed any products.</p>
+        </div>
+    }
+    else
+    {
+        @foreach (var item in Model.Products)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="@item.PhotoPath" alt="@item.Name" style="height: 200px; object-fit: cover;">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Price.ToString("C")</p>
+                        <p class="card-text"><small class="text-muted">Quantity: @item.Quantity</small></p>
+                        <div class="mt-auto">
+                            <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Display User Spending Summary -->
+        @if (Model.UserSpendingSummary.Any())
+        {
+            <h2>User's Orders</h2>
+
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>User Email</th>
+                        <th>Total Spent</th>
+                        <th>Total Commission Paid (10%)</th>
+                        <th>Total Tax Paid (5%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.UserSpendingSummary)
+                    {
+                        <tr>
+                            <td>@user.UserEmail</td>
+                            <td>@user.TotalSpent.ToString("C")</td>
+                            <td>@user.TotalCommissionPaid.ToString("C")</td>
+                            <td>@user.TotalTaxPaid.ToString("C")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No other users have ordered your products yet.</p> <!-- Display this message if no orders are found -->
+        }
+    }
+</div>
+
+<hr />
+

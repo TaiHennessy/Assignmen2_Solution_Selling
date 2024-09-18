@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Assignmen2.Models.Transaction>
+
+@{
+    ViewData["Title"] = "Purchase Report";
+}
+
+<h1>Purchase Report</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Seller</th>
+            <th>Total Amount Spent</th>
+            <th>Transaction Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var transaction in Model)
+        {
+            <tr>
+                <td>@transaction.SellerId</td>
+                <td>@transaction.TotalAmount.ToString("C")</td>
+                <td>@transaction.TransactionDate.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Print Button -->
+<a href="javascript:window.print()" class="btn btn-primary">Print</a>

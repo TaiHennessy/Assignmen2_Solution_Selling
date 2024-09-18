@@ -1,0 +1,93 @@
+﻿@model Assignmen2.Models.Cart
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<h3 class="my-4">Shopping Cart</h3>
+
+@if (Model.Items.Count > 0)
+{
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Product</th>
+                    <th class="text-center">Quantity</th>
+                    <th class="text-center">Price</th>
+                    <th class="text-center">Commission (10%)</th>
+                    <th class="text-center">Tax (5%)</th>
+                    <th class="text-center">Total Cost</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    // Convert item.Product.Price to decimal
+                    var price = Convert.ToDecimal(item.Product.Price);
+
+                    // Calculate commission and tax
+                    var commission = price * item.Quantity * 0.10m;
+                    var tax = price * item.Quantity * 0.05m;
+                    var totalCost = (price * item.Quantity) + commission + tax;
+
+
+                    <tr>
+                        <td>@item.Product.Name</td>
+                        <td class="text-center">@item.Quantity</td>
+                        <td class="text-center">@item.Product.Price.ToString("C")</td>
+                        <td class="text-center">@commission.ToString("C")</td>
+                        <td class="text-center">@tax.ToString("C")</td>
+                        <td class="text-center">@totalCost.ToString("C")</td>
+                        <td class="text-center">
+                            <form action="/Cart/Remove" method="post" class="d-inline">
+                                <input type="hidden" name="productId" value="@item.Product.Id" />
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash-alt"></i> Remove
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5" class="text-right font-weight-bold">Total Cost:</td>
+                    <td class="text-center font-weight-bold">
+                        @Model.Items.Sum(i => Convert.ToDecimal(i.Product.Price) * i.Quantity * 1.15m).ToString("C")
+                    </td>
+
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <form asp-controller="Products" asp-action="Index" method="get">
+                <button type="submit" class="btn btn-secondary btn-lg btn-block">
+                    Continue Shopping
+                </button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <form asp-action="FinishPurchase" method="post">
+                <button type="submit" class="btn btn-primary btn-lg btn-block">
+                    Finish Purchase
+                </button>
+            </form>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-info mt-4">
+        Your cart is empty. <a href="/Products" class="alert-link">Continue shopping</a> to find products!
+    </div>
+}
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- Optional for icons -->
+}
